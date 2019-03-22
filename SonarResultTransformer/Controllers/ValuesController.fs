@@ -34,6 +34,25 @@ type SolarWindsResult = {
     TaskId: string
     }
 
+type Field = {
+    Short: bool;
+    Title: string;
+    Value: string;
+    }
+
+type Attachment = {
+    Fields: Field[]
+    }
+
+type MattermostNotification = {
+    Channel: string;
+    Username: string;
+    Icon_Url: string;
+    Text: string;
+    Attachments: Attachment[];
+
+    }
+
 [<Route("api/[controller]")>]
 [<ApiController>]
 type ValuesController () =
