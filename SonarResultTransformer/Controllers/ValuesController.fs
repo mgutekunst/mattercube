@@ -5,30 +5,37 @@ open System.Collections.Generic
 open System.Linq
 open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
+open FSharp.Data
+
+
+type Project = {
+    Key: string;
+    Name: string
+    }
+type Condition = {
+    Metric: string;
+    Status: string
+    }
+
+type QualityGate = {
+    Conditions: Condition[];
+    Name: string;
+    Status: string
+    }
+
+type SolarWindsResult = {
+    AnalysedAt: DateTime;
+    Project: Project;
+    ServerUrl: string;
+    Status: string;
+    TaskId: string
+    }
 
 [<Route("api/[controller]")>]
 [<ApiController>]
 type ValuesController () =
     inherit ControllerBase()
 
-    [<HttpGet>]
-    member this.Get() =
-        let values = [|"value1"; "value2"|]
-        ActionResult<string[]>(values)
-
-    [<HttpGet("{id}")>]
-    member this.Get(id:int) =
-        let value = "value"
-        ActionResult<string>(value)
-
     [<HttpPost>]
-    member this.Post([<FromBody>] value:string) =
-        ()
-
-    [<HttpPut("{id}")>]
-    member this.Put(id:int, [<FromBody>] value:string ) =
-        ()
-
-    [<HttpDelete("{id}")>]
-    member this.Delete(id:int) =
-        ()
+    member this.Post([<FromBody>] value:SolarWindsResult) =
+        ActionResult<SolarWindsResult>(value)
