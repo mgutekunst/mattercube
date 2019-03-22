@@ -5,7 +5,10 @@ open System.Collections.Generic
 open System.Linq
 open System.Threading.Tasks
 open Microsoft.AspNetCore.Mvc
+
 open FSharp.Data
+open Newtonsoft.Json
+open FSharp.Data.HttpRequestHeaders
 
 
 type Project = {
@@ -38,4 +41,8 @@ type ValuesController () =
 
     [<HttpPost>]
     member this.Post([<FromBody>] value:SolarWindsResult) =
+        let obj = JsonConvert.SerializeObject(value)
+        let result = Http.RequestString ("http://requestbin.fullcontact.com/1c9ymib1",
+                                         headers = [ ContentType  HttpContentTypes.Json],
+                                         body = TextRequest obj)
         ActionResult<SolarWindsResult>(value)
