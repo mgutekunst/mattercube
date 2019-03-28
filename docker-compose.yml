@@ -1,0 +1,16 @@
+version: '3'
+services:
+  sonarqube:
+    image: "sonarqube"
+    ports:
+      - "9000:9000"
+  hooktransformer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - CHANNEL=anotherChannel
+      - ICON_URL=abc
+      - USERANEM=MyUser
+      - TEXT=Resultsbla
+      - HOOK_URL=http://requestbin.fullcontact.com/1kg0awp1
