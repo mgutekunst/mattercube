@@ -14,6 +14,12 @@ FROM mcr.microsoft.com/dotnet/core/aspnet:2.1
 WORKDIR /app
 COPY --from=build-env /app/out ./
 
+ENV CHANNEL="Town-Square"
+ENV ICON_URL=""
+ENV USERNAME="Sonarqube"
+ENV TEXT="Here are your results"
+ENV HOOK_URL=""
+
 
 EXPOSE 80
 

@@ -2,6 +2,7 @@ module Utils.Transform
 
 open Model.Sonarqube
 open Model.Mattermost
+open Utils.Variables
 
 
 let CreateFieldsFromConditions(condition: Condition) =
@@ -21,9 +22,9 @@ let CreateAttachments(input : SonarqubeResult) : Attachment =
 
 let Transform (input: SonarqubeResult) : MattermostNotification =
     {
-        Channel = "dev";
-        Username = "Sonarqube";
-        Icon_Url = "";
-        Text = "Here are your daily Sonarqube results";
+        Channel = GetChannel;
+        Username = GetUsername;
+        Icon_Url = GetIcon;
+        Text = GetText;
         Attachments = [|CreateAttachments(input)|]
     }
