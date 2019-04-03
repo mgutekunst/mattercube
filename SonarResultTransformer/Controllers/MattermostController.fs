@@ -24,5 +24,8 @@ type MattermostController () =
 
         let result = Http.RequestString (GetHookUrl,
                                          headers = [ ContentType  HttpContentTypes.Json],
-                                         body = TextRequest obj)
+                                         body = TextRequest obj,
+                                         customizeHttpRequest = fun req ->
+                                            req.ServerCertificateValidationCallback <- fun _ _ _ _ -> true
+                                            req)
         result
